@@ -13,8 +13,8 @@ const ButtonContainer = styled.div`
     justify-content: space-between;`;
 
 const Container = styled.div`
-        display: flex;
-    justify-content: space-between;
+    display: flex;
+    justify-content: start;
     flex-flow: row wrap;
 `;
 
@@ -22,6 +22,7 @@ const Card = styled.div`
     width: 200px;
     height: 250px;
     box-shadow: 0 10px 6px -6px #777;
+    margin: 10px;
  `;
 
 const Footer = styled.div`
@@ -57,8 +58,8 @@ const BookMarkGrid = (props) => (
                             <Button onClick={() => props.deleteBookMark(bookMark.url)}><Icon className="bi bi-trash-fill"/>
                             </Button>
                             <Button onClick={() => {
-                                props.updateRow(bookMark)
                                 props.handleShow()
+                                props.updateRow(bookMark)
                             }}><Icon className="bi bi-pencil-fill"/></Button>
                         </ButtonContainer>
                     </CardBoard>

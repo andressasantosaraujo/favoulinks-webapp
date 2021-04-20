@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import axios from "axios";
 
 const NewBookMark = (props) => {
@@ -18,13 +18,16 @@ const NewBookMark = (props) => {
                 if(resp.status === 201) {
                     props.newBookMark(resp.data)
                     setBookMark(initialBookMark)
+                    props.handleClose()
                 }
             })
             .catch(error => console.log(`Error: ${error}`));
     }
 
+
     return (
         <form
+            ref={props.formRef}
             onSubmit={event => {
                 event.preventDefault()
                 if (!bookMark.title || !bookMark.url || !bookMark.category) return
@@ -52,7 +55,6 @@ const NewBookMark = (props) => {
                 value={bookMark.category}
                 onChange={handleInputChange}
             />
-            <button>Add new bookmark</button>
         </form>
     )
 }

@@ -19,15 +19,16 @@ const UpdateBookMark = (props) => {
     const updateBookMark = (bookMark) => {
         axios.put(`${url}/bookmarks`, bookMark)
             .then((resp) => {
-                if(resp.status === 201) {
+                if(resp.status === 200) {
                     props.updateBookMark(resp.data.url, resp.data)
+                    props.handleClose()
                 }
             })
             .catch(error => console.log(`Error: ${error}`));
     }
 
     return (
-        <form
+        <form ref={props.formRef}
             onSubmit={(event) => {
                 event.preventDefault()
                 updateBookMark(bookMark);
@@ -54,8 +55,6 @@ const UpdateBookMark = (props) => {
                 value={bookMark.category}
                 onChange={handleInputChange}
             />
-            <button>Update bookmark</button>
-            <button onClick={() => props.setUpdate(false)} className="button muted-button">Cancel</button>
         </form>
     )
 }
