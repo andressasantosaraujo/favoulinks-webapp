@@ -48,7 +48,8 @@ const ModalComponent = (props) => {
                         }}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={(event) => newBookRef.current.requestSubmit() }>
+                        <Button variant="primary"
+                                onClick={(event) => newBookRef.current.requestSubmit() }>
                             Save Changes
                         </Button>
                     </Modal.Footer>

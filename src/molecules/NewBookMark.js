@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import axios from "axios";
+import {Form} from 'react-bootstrap';
 
 const NewBookMark = (props) => {
     const initialBookMark = { title: '', url: '', category: '' }
@@ -26,36 +27,30 @@ const NewBookMark = (props) => {
 
 
     return (
-        <form
-            ref={props.formRef}
-            onSubmit={event => {
-                event.preventDefault()
-                if (!bookMark.title || !bookMark.url || !bookMark.category) return
-                addBookMark(bookMark)
-            }}
+        <Form ref={props.formRef}
+                onSubmit={event => {
+                    event.preventDefault()
+                    if (!bookMark.title || !bookMark.url || !bookMark.category) return
+                    addBookMark(bookMark)
+                }}
         >
-            <label>Title</label>
-            <input
-                type="text"
-                name="title"
-                value={bookMark.title}
-                onChange={handleInputChange}
-            />
-            <label>URL</label>
-            <input
-                type="text"
-                name="url"
-                value={bookMark.url}
-                onChange={handleInputChange}
-            />
-            <label>Category</label>
-            <input
-                type="text"
-                name="category"
-                value={bookMark.category}
-                onChange={handleInputChange}
-            />
-        </form>
+            <Form.Group controlId="title" >
+                <Form.Label>Title</Form.Label>
+                <Form.Control type="text" placeholder="Enter title" name="title"
+                              onChange={handleInputChange} value={bookMark.title}  />
+            </Form.Group>
+
+            <Form.Group controlId="url" >
+                <Form.Label>URL</Form.Label>
+                <Form.Control type="text" placeholder="Enter URL" name="url"
+                              onChange={handleInputChange} value={bookMark.url} />
+            </Form.Group>
+            <Form.Group controlId="category">
+                <Form.Label>Category</Form.Label>
+                <Form.Control type="text" placeholder="Enter category" name="category"
+                              onChange={handleInputChange}  value={bookMark.category} />
+            </Form.Group>
+        </Form>
     )
 }
 
