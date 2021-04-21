@@ -11,10 +11,10 @@ const NewBookMark = (props) => {
         setBookMark({ ...bookMark, [name]: value })
     }
 
-    const url = 'https://4jtjbb4yi8.execute-api.us-east-2.amazonaws.com/favoulinks';
+    const url = 'https://p0y7ssu9ik.execute-api.us-east-2.amazonaws.com/Prod/favoulinks/';
 
     const addBookMark = (bookMark) => {
-        axios.post(`${url}/bookmarks`, bookMark)
+        axios.post(`${url}`, bookMark)
             .then((resp) => {
                 if(resp.status === 201) {
                     props.newBookMark(resp.data)

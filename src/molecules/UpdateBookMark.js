@@ -15,10 +15,10 @@ const UpdateBookMark = (props) => {
         setBookMark(props.currentBookMark)
     }, [props])
 
-    const url = 'https://4jtjbb4yi8.execute-api.us-east-2.amazonaws.com/favoulinks';
+    const url = 'https://p0y7ssu9ik.execute-api.us-east-2.amazonaws.com/Prod/favoulinks/';
 
     const updateBookMark = (bookMark) => {
-        axios.put(`${url}/bookmarks`, bookMark)
+        axios.put(`${url}`, bookMark)
             .then((resp) => {
                 if(resp.status === 200) {
                     props.updateBookMark(resp.data.url, resp.data)

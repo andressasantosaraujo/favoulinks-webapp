@@ -17,14 +17,14 @@ const App = () => {
 
     const [bookMarks, setBookMarks] = useState([])
 
-    const url = 'https://4jtjbb4yi8.execute-api.us-east-2.amazonaws.com/favoulinks';
+    const url = 'https://p0y7ssu9ik.execute-api.us-east-2.amazonaws.com/Prod/favoulinks/';
 
     useEffect(() => {
         getBookMark();
     }, []);
 
     const getBookMark = () => {
-        axios.get(`${url}/bookmarks`)
+        axios.get(`${url}`)
             .then((resp) => {
                 setBookMarks(resp.data)
             })
@@ -36,8 +36,8 @@ const App = () => {
     }
 
     const deleteBookMark = (url) => {
-        const urlAPI = 'https://4jtjbb4yi8.execute-api.us-east-2.amazonaws.com/favoulinks';
-        axios.delete(`${urlAPI}/bookmarks?url=${url}`)
+        const urlAPI = 'https://p0y7ssu9ik.execute-api.us-east-2.amazonaws.com/Prod/favoulinks/';
+        axios.delete(`${urlAPI}?url=${url}`)
             .then((resp) => {
                 if (resp.status === 200) {
                     setBookMarks(bookMarks.filter((bookMark) => bookMark.url !== url))
