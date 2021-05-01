@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import axios from "axios";
 import {Form} from 'react-bootstrap';
+import FormGroup from "../atoms/FormGroup";
 
 const NewBookMark = (props) => {
     const initialBookMark = { title: '', url: '', category: '' }
@@ -34,22 +35,9 @@ const NewBookMark = (props) => {
                     addBookMark(bookMark)
                 }}
         >
-            <Form.Group controlId="title" >
-                <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder="Enter title" name="title"
-                              onChange={handleInputChange} value={bookMark.title}  />
-            </Form.Group>
-
-            <Form.Group controlId="url" >
-                <Form.Label>URL</Form.Label>
-                <Form.Control type="text" placeholder="Enter URL" name="url"
-                              onChange={handleInputChange} value={bookMark.url} />
-            </Form.Group>
-            <Form.Group controlId="category">
-                <Form.Label>Category</Form.Label>
-                <Form.Control type="text" placeholder="Enter category" name="category"
-                              onChange={handleInputChange}  value={bookMark.category} />
-            </Form.Group>
+            <FormGroup name="title" type="text" onChange={handleInputChange} value={bookMark.title} />
+            <FormGroup name="url" type="text" onChange={handleInputChange} value={bookMark.url} />
+            <FormGroup name="category" type="text" onChange={handleInputChange} value={bookMark.category} />
         </Form>
     )
 }

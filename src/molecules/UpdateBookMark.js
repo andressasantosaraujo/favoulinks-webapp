@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import {Form} from 'react-bootstrap';
+import FormGroup from "../atoms/FormGroup";
 
 const UpdateBookMark = (props) => {
     const [bookMark, setBookMark] = useState(props.currentBookMark)
@@ -35,21 +36,9 @@ const UpdateBookMark = (props) => {
                 updateBookMark(bookMark);
             }}
         >
-            <Form.Group controlId="title" >
-                <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder="Enter title" name="title"
-                              onChange={handleInputChange} value={bookMark.title}  />
-            </Form.Group>
-            <Form.Group controlId="url" >
-                <Form.Label>URL</Form.Label>
-                <Form.Control type="text" placeholder="Enter URL" name="url"
-                              onChange={handleInputChange} value={bookMark.url} />
-            </Form.Group>
-            <Form.Group controlId="category">
-                <Form.Label>Category</Form.Label>
-                <Form.Control type="text" placeholder="Enter category" name="category"
-                              onChange={handleInputChange}  value={bookMark.category} />
-            </Form.Group>
+            <FormGroup name="Title" type="text" onChange={handleInputChange} value={bookMark.title} />
+            <FormGroup name="URL" type="text" onChange={handleInputChange} value={bookMark.url} />
+            <FormGroup name="Category" type="text" onChange={handleInputChange} value={bookMark.category} />
         </Form>
     )
 }

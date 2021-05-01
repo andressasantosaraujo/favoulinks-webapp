@@ -5,7 +5,6 @@ const Container = styled.header`
     margin-bottom: 5%;
 
 `;
-
 const Logo = styled.div`
     margin-bottom: 30px;
 `;
