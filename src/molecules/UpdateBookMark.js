@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import axios from "axios";
 import {Form} from 'react-bootstrap';
 import FormGroup from "../atoms/FormGroup";
+import Api from '../service/Api'
 
 const UpdateBookMark = (props) => {
     const [bookMark, setBookMark] = useState(props.currentBookMark)
@@ -12,22 +12,18 @@ const UpdateBookMark = (props) => {
         setBookMark({ ...bookMark, [name]: value })
     }
 
+    const updateBookMark = (bookMark) => {
+        Api.updateBookMark(bookMark).then((resp) => {
+            if (resp.status === 200) {
+                props.updateBookMark(resp.data.url, resp.data)
+                props.handleClose()
+            }
+        })
+    }
+
     useEffect(() => {
         setBookMark(props.currentBookMark)
     }, [props])
-
-    const url = 'https://p0y7ssu9ik.execute-api.us-east-2.amazonaws.com/Prod/favoulinks/';
-
-    const updateBookMark = (bookMark) => {
-        axios.put(`${url}`, bookMark)
-            .then((resp) => {
-                if(resp.status === 200) {
-                    props.updateBookMark(resp.data.url, resp.data)
-                    props.handleClose()
-                }
-            })
-            .catch(error => console.log(`Error: ${error}`));
-    }
 
     return (
         <Form ref={props.formRef}

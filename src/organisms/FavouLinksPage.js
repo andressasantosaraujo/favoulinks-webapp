@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import BookMarkGrid from '../molecules/BookMarkGrid'
 import HeaderComponent from '../molecules/HeaderComponent'
-import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import styled from 'styled-components'
 import ModalComponent from '../molecules/ModalComponent';
+import Api from '../service/Api'
 
 const Container = styled.div`
     background: linear-gradient(180deg, transparent, #F7F7F7);
@@ -13,37 +13,32 @@ const Container = styled.div`
     padding-left: 5%;
 `;
 
-const FavoulinksPage = () => {
+const FavouLinksPage = () => {
 
     const [bookMarks, setBookMarks] = useState([])
 
-    const url = 'https://p0y7ssu9ik.execute-api.us-east-2.amazonaws.com/Prod/favoulinks/';
+    const getBookMark = () => {
+        Api.getBookMarks().then((resp) => {
+            if (resp.status === 200) {
+                setBookMarks(resp.data)
+            }
+        })
+    }
+
+    const deleteBookMark = (url) => {
+        Api.deleteBookMark(url).then((resp) => {
+            if (resp.status === 200) {
+                getBookMark()
+            }
+        })
+    }
 
     useEffect(() => {
         getBookMark();
     }, []);
 
-    const getBookMark = () => {
-        axios.get(`${url}`)
-            .then((resp) => {
-                setBookMarks(resp.data)
-            })
-            .catch(error => console.log(`Error: ${error}`));
-    }
-
     const newBookMark = (bookMark) => {
         setBookMarks([...bookMarks, bookMark])
-    }
-
-    const deleteBookMark = (url) => {
-        const urlAPI = 'https://p0y7ssu9ik.execute-api.us-east-2.amazonaws.com/Prod/favoulinks/';
-        axios.delete(`${urlAPI}?url=${url}`)
-            .then((resp) => {
-                if (resp.status === 200) {
-                    setBookMarks(bookMarks.filter((bookMark) => bookMark.url !== url))
-                }
-            })
-            .catch(error => console.log(`Error: ${error}`));
     }
 
     const [update, setUpdate] = useState(false)
@@ -77,4 +72,4 @@ const FavoulinksPage = () => {
     )
 }
 
-export default FavoulinksPage
+export default FavouLinksPage

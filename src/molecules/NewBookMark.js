@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import axios from "axios";
 import {Form} from 'react-bootstrap';
 import FormGroup from "../atoms/FormGroup";
+import Api from '../service/Api'
 
 const NewBookMark = (props) => {
     const initialBookMark = { title: '', url: '', category: '' }
@@ -12,20 +12,15 @@ const NewBookMark = (props) => {
         setBookMark({ ...bookMark, [name]: value })
     }
 
-    const url = 'https://p0y7ssu9ik.execute-api.us-east-2.amazonaws.com/Prod/favoulinks/';
-
     const addBookMark = (bookMark) => {
-        axios.post(`${url}`, bookMark)
-            .then((resp) => {
-                if(resp.status === 201) {
-                    props.newBookMark(resp.data)
-                    setBookMark(initialBookMark)
-                    props.handleClose()
-                }
-            })
-            .catch(error => console.log(`Error: ${error}`));
+        Api.addBookMark(bookMark).then((resp) => {
+            if (resp.status === 201) {
+                props.newBookMark(resp.data)
+                setBookMark(initialBookMark)
+                props.handleClose()
+            }
+        })
     }
-
 
     return (
         <Form ref={props.formRef}
@@ -35,9 +30,9 @@ const NewBookMark = (props) => {
                     addBookMark(bookMark)
                 }}
         >
-            <FormGroup name="title" type="text" onChange={handleInputChange} value={bookMark.title} />
-            <FormGroup name="url" type="text" onChange={handleInputChange} value={bookMark.url} />
-            <FormGroup name="category" type="text" onChange={handleInputChange} value={bookMark.category} />
+            <FormGroup name="Title" type="text" onChange={handleInputChange} value={bookMark.title} />
+            <FormGroup name="URL" type="text" onChange={handleInputChange} value={bookMark.url} />
+            <FormGroup name="Category" type="text" onChange={handleInputChange} value={bookMark.category} />
         </Form>
     )
 }
